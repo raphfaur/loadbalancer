@@ -7,7 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Generate compile commands
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # does not produce the json file
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "") # works
+set(CMAKE_EXPORT_COMPILE_COMMANDS
+    ON
+    CACHE INTERNAL "") # works
 
 # Add log library
 add_library(logger src/log/logger.cpp src/log/logger.hpp)
@@ -28,15 +30,8 @@ target_link_libraries(logger)
 
 enable_testing()
 
-add_executable(
-  logger_test
-  test/log_test.cpp
-)
-target_link_libraries(
-  logger_test
-  GTest::gtest_main
-  logger
-)
+add_executable(logger_test test/log_test.cpp)
+target_link_libraries(logger_test GTest::gtest_main logger)
 
 include(GoogleTest)
 gtest_discover_tests(logger_test)
