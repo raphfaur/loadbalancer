@@ -13,6 +13,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS
 
 # Add log library
 add_library(logger src/log/logger.cpp src/log/logger.hpp)
+add_library(balancer src/balancer/balancer.cpp src/balancer/balancer.hpp)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -33,5 +34,9 @@ enable_testing()
 add_executable(logger_test test/log_test.cpp)
 target_link_libraries(logger_test GTest::gtest_main logger)
 
+add_executable(balancer_test test/balancer_test.cpp)
+target_link_libraries(balancer_test GTest::gtest_main balancer)
+
 include(GoogleTest)
 gtest_discover_tests(logger_test)
+gtest_discover_tests(balancer_test)
